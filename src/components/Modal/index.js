@@ -5,8 +5,8 @@ const Modal = ({ onSetModalIsOn, onSetContacts }) => {
 
   const [userInput, setUserInput] = useState({ name: '', phoneNumber: '' });
   const createNewContact = (e) => {
-    const { name: fieldName, value } = e.target
-    setUserInput((userInput) => ({ ...userInput, [fieldName]: value }));
+    const { value, name } = e.target
+    setUserInput((userInput) => ({ id: Date.now(), ...userInput, [name]: value }));
   }
 
   const addNewContactToList = () => {
@@ -24,7 +24,7 @@ const Modal = ({ onSetModalIsOn, onSetContacts }) => {
         <span className="close" onClick={() => onSetModalIsOn(false)}>&times;</span>
         <h2 style={{ textAlign: "center" }}>Add new Contact</h2>
         <div className='userInputWrapper'>
-          <input type='text' name='Name' placeholder='Name' onInput={createNewContact} />
+          <input type='text' name='name' placeholder='Name' onInput={createNewContact} />
         </div>
         <div className='userInputWrapper'>
           <input type='text' name="phoneNumber" placeholder='Phone number' onInput={createNewContact} />

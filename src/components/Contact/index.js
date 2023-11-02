@@ -1,11 +1,14 @@
-const Contact = () => {
+const Contact = ({ contactData, checkedIds, onToggleContactFromList }) => {
+
   return (
     <tr>
-      <td><input type="checkbox" /></td>
+      <td>
+        <input type="checkbox" onChange={(e) => onToggleContactFromList(e, contactData.id)} checked={checkedIds.includes(contactData.id)} />
+      </td>
       <td><i className="fa fa-trash-o" /></td>
       <td><i className="fa fa-pencil"></i></td>
-      <td>Name</td>
-      <td>Phone number</td>
+      <td>{contactData.name}</td>
+      <td>{contactData.phoneNumber}</td>
     </tr>
   )
 }

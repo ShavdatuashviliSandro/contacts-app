@@ -10,7 +10,7 @@ const App = () => {
   return (
     <>
       <button onClick={() => setModalIsOn(true)} id="add-new-contact">Add Contact</button>
-      <ContactList />
+      <ContactList contacts={contacts}/>
       {modalIsOn && <Modal onSetModalIsOn={setModalIsOn} onSetContacts={setContacts} />}
     </>
 
