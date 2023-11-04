@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Contact from '../Contact';
 import './contactList.css';
 
-const ContactList = ({ contacts }) => {
+const ContactList = ({ contacts, onSetContacts }) => {
   const [checkedIds, setCheckedIds] = useState([]);
 
   const checkAll = (e) => {
@@ -30,13 +30,28 @@ const ContactList = ({ contacts }) => {
     }
   }
 
+  const handleDeleteChecked = () => {
+    if (checkedIds.length === contacts.length) {
+      onSetContacts([]);
+      localStorage.clear();
+    }
+    else {
+      onSetContacts((contacts) => {
+        const filteredList = contacts.filter(contact => !checkedIds.includes(contact.id));
+        localStorage.setItem("contacts", JSON.stringify(filteredList));
+        return filteredList;
+      });
+    }
+    setCheckedIds([])
+  }
+
   return (
     <table>
       <caption>Contacts</caption>
       <thead>
         <tr>
           <th><input type="checkbox" onChange={checkAll} checked={checkedIds.length && checkedIds.length === contacts.length} /></th>
-          <th><i className="fa fa-trash-o" /></th>
+          <th><i className="fa fa-trash-o delete-all" onClick={handleDeleteChecked} /></th>
           <th></th>
           <th>Name</th>
           <th>Phone number</th>

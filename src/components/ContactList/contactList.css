@@ -2,3 +2,7 @@ table{
   width: 350px;
   margin: auto;
 }
+
+.delete-all{
+  cursor: pointer;
+}
