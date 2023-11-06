@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import Contact from '../Contact';
 import './contactList.css';
 
@@ -48,6 +48,10 @@ const ContactList = ({ contacts, onSetContacts }) => {
   const handleDeleteContact = (contactId) => {
     onSetContacts(contacts.filter(contact => contact.id !== contactId))
   }
+
+  useEffect(()=> {
+    localStorage.setItem("contacts",JSON.stringify(contacts))
+  },[contacts])
 
   return (
     <table>
