@@ -45,6 +45,10 @@ const ContactList = ({ contacts, onSetContacts }) => {
     setCheckedIds([])
   }
 
+  const handleDeleteContact = (contactId) => {
+    onSetContacts(contacts.filter(contact => contact.id !== contactId))
+  }
+
   return (
     <table>
       <caption>Contacts</caption>
@@ -59,7 +63,7 @@ const ContactList = ({ contacts, onSetContacts }) => {
       </thead>
       <tbody>
         {
-          contacts.map((contact, i) => <Contact onToggleContactFromList={toggleContactFromList} checkedIds={checkedIds} contactData={contact} key={`contact-${i}`} />)
+          contacts.map((contact, i) => <Contact onToggleContactFromList={toggleContactFromList} checkedIds={checkedIds} contactData={contact} handleDeleteContact={handleDeleteContact} key={`contact-${i}`} />)
         }
 
       </tbody>
